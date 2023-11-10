@@ -13,14 +13,15 @@ namespace MotionOfThePlanets
 
             WindowState = FormWindowState.Maximized;
 
+            cmbSistema.Items.Add("StarPlanetCometSystem");
+            cmbSistema.Items.Add("TwoStarsSystemWithPlanet");
+            cmbSistema.Items.Add("TwoStarsSystemWithCrossingPlanet");
+            cmbSistema.Items.Add("TwoStarsSystemRound");
+            cmbSistema.Items.Add("TwoStarsSystem");
+            cmbSistema.Items.Add("ThreeStarsSystem");
+            cmbSistema.Items.Add("PlanetMoonSystem");
 
-            //StarPlanetCometSystem();
-            TwoStarsSystemWithPlanet();
-            TwoStarsSystemWithCrossingPlanet();
-            //TwoStarsSystemRound();
-            //TwoStarsSystem();
-            //ThreeStarsSystem();
-            //PlanetMoonSystem();
+            cmbSistema.SelectedIndex = 0;
         }
 
         private PlanetarySystem _planetarySystem;
@@ -43,7 +44,7 @@ namespace MotionOfThePlanets
                 foreach (Planet planet in _planetarySystem.Planets)
                 {
                     double radius = Math.Pow(planet.Mass, 1 / 3d);
-                    int size = (int) radius;
+                    int size = (int)radius;
                     if (size < 3)
                         size = 3;
 
@@ -201,7 +202,7 @@ namespace MotionOfThePlanets
             {
                 Position = new Vector(0, 200),
                 Mass = 500,
-                Speed = new Vector(100, -33),
+                Speed = new Vector(0, -66),
                 Color = Color.Blue
             };
 
@@ -209,15 +210,15 @@ namespace MotionOfThePlanets
             {
                 Position = new Vector(0, 0),
                 Mass = 500,
-                Speed = new Vector(-100, 33),
+                Speed = new Vector(66, 66),
                 Color = Color.Brown
             };
 
             planets[2] = new Planet()
             {
-                Position = new Vector(66, 66),
-                Mass = 500,
-                Speed = new Vector(0, -122),
+                Position = new Vector(200, 0),
+                Mass = 200,
+                Speed = new Vector(33, 33),
                 Color = Color.GreenYellow
             };
 
@@ -251,6 +252,50 @@ namespace MotionOfThePlanets
         private void btnSetTimer_Click(object sender, EventArgs e)
         {
             timer.Interval = int.Parse(numTimer.Text);
+        }
+
+        private void cmbSistema_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            switch (cmbSistema.SelectedItem.ToString())
+            {
+
+                case "StarPlanetCometSystem":
+                    StarPlanetCometSystem();
+                    break;
+
+                case "TwoStarsSystemWithPlanet":
+                    TwoStarsSystemWithPlanet();
+                    break;
+
+                case "TwoStarsSystemWithCrossingPlanet":
+                    TwoStarsSystemWithCrossingPlanet();
+                    break;
+
+                case "TwoStarsSystemRound":
+                    TwoStarsSystemRound();
+                    break;
+
+                case "TwoStarsSystem":
+                    TwoStarsSystem();
+                    break;
+
+                case "ThreeStarsSystem":
+                    ThreeStarsSystem();
+                    break;
+
+                case "PlanetMoonSystem":
+                    PlanetMoonSystem();
+                    break;
+            }
+
+
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            var g = this.CreateGraphics();
+            g.Clear(Color.DarkBlue);
         }
     }
 }
